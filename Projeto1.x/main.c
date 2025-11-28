@@ -50,6 +50,8 @@
                          Main application
  */
 
+//extern volatile bool second_has_passed;
+
 unsigned char readTC74 (void)
 {
 	unsigned char value;
@@ -87,14 +89,17 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
 
+
+    unsigned long seconds = 0;
+    unsigned long hours, minutes, secs;
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:
 
     // Enable the Global Interrupts
-    //INTERRUPT_GlobalInterruptEnable();
+    INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
+    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
@@ -111,9 +116,29 @@ void main(void)
 
     while (1)
     {
-        // Add your application code
         
-        c = readTC74();
+        if (second_has_passed==true) {
+          second_has_passed = false;
+          seconds++;
+          hours = (seconds / 3600);
+          minutes = (seconds / 60) % 60;
+          secs = seconds % 60;
+
+          LCDcmd(0x80);       //first line, first column
+          sprintf(buf, "Time %02lu:%02lu:%02lu", hours, minutes, secs);
+          LCDstr(buf);
+          while (LCDbusy());
+        }//
+        
+        IO_RA7_Toggle();
+        __delay_ms(1000);
+        // SLEEP();
+        //NOP();
+        
+        
+
+
+        /*c = readTC74();
         LCDcmd(0x80);       //first line, first column
         while (LCDbusy());
         LCDstr("Temp");
@@ -124,7 +149,7 @@ void main(void)
         sprintf(buf, "%02d C", c);
         while (LCDbusy());
         LCDstr(buf);
-        __delay_ms(2000);
+        __delay_ms(2000); */
     }
 }
 /**

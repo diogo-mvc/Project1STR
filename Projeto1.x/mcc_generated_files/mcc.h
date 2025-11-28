@@ -52,7 +52,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <conio.h>
+#include "interrupt_manager.h"
 #include "i2c1_master.h"
+#include "tmr1.h"
+#include "clkref.h"
 
 
 
