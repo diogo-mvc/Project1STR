@@ -74,10 +74,21 @@
 #define TEMP_ALARM 2
 #define LIGHT_ALARM 3
 
+#define CONFIG_SELECT_HOUR   0
+#define CONFIG_SELECT_MINUTE 1
+#define CONFIG_SELECT_SECOND 2
+#define CONFIG_SELECT_C      3
+#define CONFIG_SELECT_T      4
+#define CONFIG_SELECT_L      5
+#define CONFIG_SELECT_A      6
+#define CONFIG_SELECT_R      7
+
 
 /*------------------GLOBAL VARIABLES(good for interrupt handling) ----------------*/
 extern volatile int curr_mode        = NORMAL_MODE;
 extern volatile int alarm_flag       = NO_ALARM;
+extern volatile int config_selection = CONFIG_SELECT_HOUR;
+
 extern volatile int inactive_time      = 0;  /*for counting the time in record mode*/
 extern volatile int pwm_active_time    = -1; /*start at -1 to even out the increments*/
 
@@ -85,12 +96,13 @@ extern volatile int pwm_active_time    = -1; /*start at -1 to even out the incre
 extern volatile bool S1_pressed      = false;
 extern volatile bool S2_pressed      = false;
 extern volatile bool alarms_enabled  = false;
+extern volatile bool sound_PWM       = false;
 
 extern volatile int alarm_hour   = ALAS;
 extern volatile int alarm_minute = ALAM;
 extern volatile int alarm_second = ALAH;
-extern volatile int temp_alarm   = ALAT;
-extern volatile int light_alarm  = ALAL;
+extern volatile int alarm_temp   = ALAT;
+extern volatile int alarm_light  = ALAL;
 
 
 
@@ -197,8 +209,6 @@ void resolve_NORMAL_MODE(){
     SensorData.minutes = (SensorData.seconds / 60) % 60;
     secs = SensorData.seconds % 60;
 
-    inactive_time ++; /*increase inactive time, can cleared ahead if a button was pressed*/
-
     LCDcmd(0x80);       //first line, first column
     sprintf(buf, "%02lu:%02lu:%02lu", SensorData.hours, SensorData.minutes, SensorData.secs);
     LCDstr(buf);
@@ -219,54 +229,220 @@ void resolve_NORMAL_MODE(){
       sprintf(buf, "L %1d", SensorData.light); /*limit to 1 character*/
       LCDstr(buf);
       while (LCDbusy());
-
     }
 
     if(alarms_enabled == true){
+
+      /*show on LCD "A"*/
+      LCDcmd(0x80);       // second line, first column
+      LCDpos(0,15);
+      LCDstr("A");
+      while(LDCbusy());
 
       /*check if alarm should go off for time*/
       if (SensorData.hours == alarm_hour){
         if(SensorData.minutes == alarm_minute){
           if(SensorData.seconds == alarm_second){
             alarm_flag = TIME_ALARM;
-
           }
         }
       }
 
       /*check if alarm should go off for temperature*/
-      if(SensorData.temp > temp_alarm){
+      if(SensorData.temp > alarm_temp){
         alarm_flag = TEMP_ALARM;
+
       }
       
       /*check if alarm should go off for light*/
-      if(SensorData.light < light_alarm){
+      if(SensorData.light < alarm_light){
         alarm_flag = LIGHT_ALARM;
       }
 
-
       /*resolve alarm situation*/
       switch (curr_alarm){
-        case TIME_ALARM : break;
-        case TEMP_ALARM : break;
-        case LIGHT_ALRAM: break;
+        case TIME_ALARM : 
+          /*LCD shows C*/
+          LCDcmd(0x80);      
+          LCDpos(0,13);   // line 1, column 13
+          LCDstr("C");
+        break;
+        case TEMP_ALARM : 
+          /*LCD shows T*/
+          LCDcmd(0x80);       
+          LCDpos(0,13);   // line 1, column 13
+          LCDstr("T"); 
+        break;
+        case LIGHT_ALARM: 
+          /*LCD shows L*/
+          LCDcmd(0x80);       
+          LCDpos(0,13);  // line 1, column 13
+          LCDstr("L");
+        break;
         default:
-
-
+        }else{
+          LCDcmd(0x80);       
+          LCDpos(0,15);   // line 1, column 13
+          LCDstr("a");
       }
 
+    }
 
+    SLEEP();
+    NOP();
+
+  }/*end of every second code*/
+  
+  if (S1_pressed == true){
+    if (alarm_flag != NO_ALARM){alarm_flag == NO_ALARM;}
+    else{ /*there was no alarm going off, lets go config mode*/
+      curr_mode = CONFIG_MODE;
     }
   }
-        
-  IO_RA7_Toggle();
-  SLEEP();
-  NOP();
+
+  if (S2_pressed == true){
+    curr_mode = RECORD_MODE;
+  }
 
 }
 
-void resolve_CONFIG_MODE(){}
-void resolve_RECORD_MODE(){}
+void resolve_CONFIG_MODE(){
+
+  if (second_has_passed==true) {
+    /*update the clock*/
+    second_has_passed = false;
+    SensorData.seconds++;
+    SensorData.hours = (SensorData.seconds / 3600) % 24;
+    SensorData.minutes = (SensorData.seconds / 60) % 60;
+    secs = SensorData.seconds % 60;
+
+    if (config_selection != CONFIG_SELECT_C){/*if alarm clock is not being configured update clock*/
+      LCDcmd(0x80);       //first line, first column
+      sprintf(buf, "%02lu:%02lu:%02lu", SensorData.hours, SensorData.minutes, SensorData.secs);
+      LCDstr(buf);
+      while (LCDbusy());
+    }
+  }
+
+  if(S1_pressed == true){ 
+    config_selection ++; /*move selection to the next one*/
+    switch (config_selection){
+      case CONFIG_SELECT_HOUR   : 
+      /*move cursor to the right of hours*/
+      break;
+      case CONFIG_SELECT_MINUTE : 
+      /*move cursor to the right of minutes*/
+      break;
+      case CONFIG_SELECT_SECOND : 
+      /*move cursor to the right of seconds*/
+      break;
+      case CONFIG_SELECT_C      : 
+      /*move cursor to C*/
+      /*show alarm clock value*/
+      break;
+      case CONFIG_SELECT_T      : 
+      /*move cursor to T*/
+      /*show current time value*/
+      /*show alarm temperature value*/
+      break;
+      case CONFIG_SELECT_L      : 
+      /*move cursor to L*/
+      /*show alarm light value*/
+      break;
+      case CONFIG_SELECT_A      : 
+      /*move cursor to A*/
+      break;
+      case CONFIG_SELECT_R      : 
+      /*move cursor to R*/
+      break;
+      default:
+      /*went out of selections, exit config mode*/
+      curr_mode = NORMAL_MODE;
+      /*show normal screen*/
+      return;
+    }
+  }
+  if(S2_pressed == true){ 
+    switch (config_selection){
+      case CONFIG_SELECT_HOUR   : 
+        SensorData.seconds += 3600;
+        SensorData.hours ++;
+        /*show updated value*/
+      break;
+      case CONFIG_SELECT_MINUTE : 
+        SensorData.seconds += 60;
+        SensorData.minutes ++;
+        /*show updated value*/
+      break;
+      case CONFIG_SELECT_SECOND : 
+        SensorData.seconds ++;
+        SensorData.secs ++;
+        /*show updated value*/
+      break;
+      case CONFIG_SELECT_C      : 
+        alarm_second ++;
+        if (alarm_second == 60){
+          alarm_second = 0;
+          alarm_minute++;
+        }
+        if (alarm_minute==60){
+          alarm_minute = 0;
+          alarm_hour ++;
+        }
+        if(alarm_hour == 24){
+          alarm_hour = 0;
+        }
+        /*show updated value*/
+
+      break;
+      case CONFIG_SELECT_T      : 
+        alarm_temp  = (alarm_temp+1)%51;
+      break;
+      case CONFIG_SELECT_L      : 
+        alarm_light = (alarm_light+1)%4;
+      break;
+      case CONFIG_SELECT_A      : 
+        alarms_enabled = !alarms_enabled;
+      break;
+      case CONFIG_SELECT_R      : 
+        /*erase EEPROM records*/
+      break;
+      default:
+      /*went out of selections, exit config mode*/
+      curr_mode = NORMAL_MODE;
+      return;
+    }
+  }
+
+}
+
+void resolve_RECORD_MODE(){
+
+   if (second_has_passed==true) {
+    /*update the clock*/
+    second_has_passed = false;
+    SensorData.seconds++;
+    SensorData.hours = (SensorData.seconds / 3600) % 24;
+    SensorData.minutes = (SensorData.seconds / 60) % 60;
+    secs = SensorData.seconds % 60;
+
+    inactive_time ++; /*increase inactive time, can cleared ahead if a button was pressed*/
+
+   }
+
+   if(S1_pressed == true){ inactive_time = 0;}
+   if(S2_pressed == true){ inactive_time = 0;}
+
+   /*show records and be responsive*/
+
+  if (inactive_time > TINA){ /*timeout->return to normal mode*/
+    inactive_time = 0;
+    curr_mode = NORMAL_MODE;
+  }
+
+
+}
+
 void resolve_OUT_OF_BOUNDS(){
   /*no idea how we got here...*/
   /*nice job =)*/
