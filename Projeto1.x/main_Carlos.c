@@ -104,7 +104,7 @@ extern volatile int alarm_second = ALAH;
 extern volatile int alarm_temp   = ALAT;
 extern volatile int alarm_light  = ALAL;
 
-
+extern volatile char buf[17]; /*buffer to write to LCD display*/
 
 extern volatile struct SensorData{
   unsigned long seconds = 0;
@@ -119,7 +119,6 @@ void resolve_NORMAL_MODE(void);
 void resolve_CONFIG_MODE(void);
 void resolve_RECORD_MODE(void);
 void resolve_OUT_OF_BOUNDS(void);
-
 
 
 unsigned char readTC74 (void)
@@ -198,7 +197,6 @@ void main(void)
 
 void resolve_NORMAL_MODE(){
 
-  char buf[17]; /*buffer to write to LCD display(maybe make it not local?)*/
 
   if (second_has_passed==true) {
     
@@ -297,11 +295,28 @@ void resolve_NORMAL_MODE(){
     if (alarm_flag != NO_ALARM){alarm_flag == NO_ALARM;}
     else{ /*there was no alarm going off, lets go config mode*/
       curr_mode = CONFIG_MODE;
+      /*show config mode screen*/
+      LCDcmd(0x80);       //first line, first column
+      if(alarms_enabled){
+        sprintf(buf, "%02lu:%02lu:%02lu  CTL AR", alarm_hour,alarm_minute,alarm_second);
+      }else{
+        sprintf(buf, "%02lu:%02lu:%02lu  CTL aR", alarm_hour,alarm_minute,alarm_second);
+      }
+      LCDstr(buf);
+      while (LCDbusy());
+      LCDcmd(0xC0);       //first line, first column
+      sprintf(buf, "%02lu C         L %02lu", alarm_temp, alarm_light);
+      LCDstr(buf);
+      while (LCDbusy());
+      return;
     }
   }
 
   if (S2_pressed == true){
     curr_mode = RECORD_MODE;
+    /*show record mode screen*/
+    return;
+
   }
 
 }
@@ -328,37 +343,60 @@ void resolve_CONFIG_MODE(){
     config_selection ++; /*move selection to the next one*/
     switch (config_selection){
       case CONFIG_SELECT_HOUR   : 
-      /*move cursor to the right of hours*/
+        /*move cursor to the right of hours*/
+        LCDcmd(0x80);
+        LCDpos(0,1);
       break;
       case CONFIG_SELECT_MINUTE : 
-      /*move cursor to the right of minutes*/
+        /*move cursor to the right of minutes*/
+        LCDcmd(0x80);
+        LCDpos(0,4);
       break;
       case CONFIG_SELECT_SECOND : 
-      /*move cursor to the right of seconds*/
+        /*move cursor to the right of seconds*/
+        LCDcmd(0x80);
+        LCDpos(0,7);
       break;
       case CONFIG_SELECT_C      : 
-      /*move cursor to C*/
-      /*show alarm clock value*/
+        /*move cursor to C*/
+        LCDcmd(0x80);
+        LCDpos(0,10);
+        /*show alarm clock value*/
+        LCDcmd(0x80);
+        LCDpos(0,0);
+        sprintf(buf, "%02lu:%02lu:%02lu", alarm_hour, alarm_minute, alarm_second);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,10);
       break;
       case CONFIG_SELECT_T      : 
-      /*move cursor to T*/
-      /*show current time value*/
-      /*show alarm temperature value*/
+        /*move cursor to T*/
+        LCDcmd(0x80);
+        LCDpos(0,11);
+        /*show current time value*/
+        /*show alarm temperature value*/
       break;
       case CONFIG_SELECT_L      : 
-      /*move cursor to L*/
-      /*show alarm light value*/
+        /*move cursor to L*/
+        LCDcmd(0x80);
+        LCDpos(0,12);
+        /*show alarm light value*/
       break;
       case CONFIG_SELECT_A      : 
-      /*move cursor to A*/
+        /*move cursor to A*/
+        LCDcmd(0x80);
+        LCDpos(0,14);
       break;
       case CONFIG_SELECT_R      : 
-      /*move cursor to R*/
+        /*move cursor to R*/
+        LCDcmd(0x80);
+        LCDpos(0,15);
       break;
       default:
-      /*went out of selections, exit config mode*/
-      curr_mode = NORMAL_MODE;
-      /*show normal screen*/
+        /*went out of selections, exit config mode*/
+        curr_mode = NORMAL_MODE;
+        /*show normal screen*/
       return;
     }
   }
@@ -368,16 +406,37 @@ void resolve_CONFIG_MODE(){
         SensorData.seconds += 3600;
         SensorData.hours ++;
         /*show updated value*/
+        LCDcmd(0x80);
+        LCDpos(0,0);
+        sprintf(buf, "%02lu:%02lu:%02lu", SensorData.hours, SensorData.minutes, SensorData.secs);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,1);
       break;
       case CONFIG_SELECT_MINUTE : 
         SensorData.seconds += 60;
         SensorData.minutes ++;
         /*show updated value*/
+        LCDcmd(0x80);
+        LCDpos(0,0);
+        sprintf(buf, "%02lu:%02lu:%02lu", SensorData.hours, SensorData.minutes, SensorData.secs);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,4);
       break;
       case CONFIG_SELECT_SECOND : 
         SensorData.seconds ++;
         SensorData.secs ++;
         /*show updated value*/
+        LCDcmd(0x80);
+        LCDpos(0,0);
+        sprintf(buf, "%02lu:%02lu:%02lu", alarm_hour, alarm_minute, alarm_second);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,10);
       break;
       case CONFIG_SELECT_C      : 
         alarm_second ++;
@@ -393,23 +452,82 @@ void resolve_CONFIG_MODE(){
           alarm_hour = 0;
         }
         /*show updated value*/
+        LCDcmd(0x80);
+        LCDpos(0,0);
+        sprintf(buf, "%02lu:%02lu:%02lu", SensorData.hours, SensorData.minutes, SensorData.secs);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,7);
 
       break;
       case CONFIG_SELECT_T      : 
         alarm_temp  = (alarm_temp+1)%51;
+        /*show updated value*/
+        LCDcmd(0xC0);
+        LCDpos(8,0);
+        sprintf(buf, "%02d C", alarm_temp);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDcmd(0x80);
+        LCDpos(0,11);
       break;
       case CONFIG_SELECT_L      : 
         alarm_light = (alarm_light+1)%4;
+        /*show updated value*/
+        LCDcmd(0xC0);
+        LCDpos(8,13);
+        sprintf(buf, "%02d C", alarm_temp);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDcmd(0x80);
+        LCDpos(0,12);
       break;
       case CONFIG_SELECT_A      : 
         alarms_enabled = !alarms_enabled;
+        /*show updated value*/
+        LCDcmd(0x80);
+        LCDpos(0,14);
+        if(alarms_enabled==true){LCDstr("A");}
+        else{LCDstr("a");}
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDpos(0,14);
       break;
-      case CONFIG_SELECT_R      : 
+      case CONFIG_SELECT_R      :
         /*erase EEPROM records*/
+        /*flash erase message to user*/
+        LCDcmd(0xC0);
+        LCDpos(8,0);
+        sprintf(buf, "Record reset",);
+        LCDstr(buf);
+        while (LCDbusy());
+        __delay_ms(500);
+        LCDpos(8,0);
+        sprintf(buf, "%02lu C          ", alarm_temp);
+        LCDstr(buf);
+        while (LCDbusy());
+        /*reposition cursor*/
+        LCDcmd(0x80);
+        LCDpos(0,15);
       break;
       default:
       /*went out of selections, exit config mode*/
       curr_mode = NORMAL_MODE;
+      LCDcmd(0x80);       //first line, first column
+      if(alarms_enabled){
+        sprintf(buf, "%02lu:%02lu:%02lu      A ", SensorData.hours,SensorData.minutes,SensorData.seconds);
+      }else{
+        sprintf(buf, "%02lu:%02lu:%02lu      a ", SensorData.hours,SensorData.minutes,SensorData.seconds);
+      }
+      LCDstr(buf);
+      while (LCDbusy());
+      LCDcmd(0xC0);       //first line, first column
+      sprintf(buf, "%02d C         L %02lu",SensorData.temp,SensorData.light);
+      LCDstr(buf);
+      while (LCDbusy());
       return;
     }
   }

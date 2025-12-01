@@ -1,4 +1,6 @@
 
+#  = feito mas precisa de integração e debug
+## = feito, ponto final
 
 Interrupções ao segundo
 Interrupções no RB4 -> S1
@@ -6,12 +8,12 @@ Interrupções no RC5 -> S2
 Ligar o PWM
 Desligar o PWM após TALA segundos
 É suposto o PWM soar sem fim se a condição de alarme não desaparecer?
-Modo de configuração
+# Modo de configuração
 Modo de ver registos
 Escrever registos na EEPROM
 comando para apagar registos da EEPROM
-ecrãs de configuração(são muitos com ligeiras diferenças)
-carregar ecrã de configuração ainda no modo normal- quando se carregou no S1
+# ecrãs de configuração(são muitos com ligeiras diferenças)
+# carregar ecrã de configuração ainda no modo normal- quando se carregou no S1
 
 
 
