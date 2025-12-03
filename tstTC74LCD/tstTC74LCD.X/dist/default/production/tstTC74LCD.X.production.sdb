@@ -59,13 +59,13 @@ I2C1_TIMEOUT 4
 I2C1_NULL 5
 ]
 "21 C:\GitHub\tstTC74LCD\tstTC74LCD.X\ui/ui.c
-[e E12705 . `uc
+[e E12723 . `uc
 UI_NORMAL 0
 UI_CONFIG 1
 UI_SHOW_RECORDS 2
 ]
 "22
-[e E12710 . `uc
+[e E12728 . `uc
 CF_CLK_HH 0
 CF_CLK_MM 1
 CF_CLK_SS 2
@@ -166,6 +166,16 @@ CF_DONE 8
 [v _wr2RegCompleteHandler wr2RegCompleteHandler `(E363  1 s 1 wr2RegCompleteHandler ]
 "170
 [v _rdBlkRegCompleteHandler rdBlkRegCompleteHandler `(E363  1 s 1 rdBlkRegCompleteHandler ]
+"32 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/ext_int.c
+[v _INT_ISR INT_ISR `(v  1 e 1 0 ]
+"41
+[v _INT_CallBack INT_CallBack `(v  1 e 1 0 ]
+"50
+[v _INT_SetInterruptHandler INT_SetInterruptHandler `(v  1 e 1 0 ]
+"54
+[v _INT_DefaultInterruptHandler INT_DefaultInterruptHandler `(v  1 e 1 0 ]
+"59
+[v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
 "167 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/i2c1_master.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 "176
@@ -266,12 +276,20 @@ CF_DONE 8
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 "50 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"62
+"63
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"76
+"77
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
-"55 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
+"57 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"151
+[v _PIN_MANAGER_IOC PIN_MANAGER_IOC `(v  1 e 1 0 ]
+"163
+[v _IOCCF5_ISR IOCCF5_ISR `(v  1 e 1 0 ]
+"178
+[v _IOCCF5_SetInterruptHandler IOCCF5_SetInterruptHandler `(v  1 e 1 0 ]
+"185
+[v _IOCCF5_DefaultInterruptHandler IOCCF5_DefaultInterruptHandler `(v  1 e 1 0 ]
 "59 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/smt1.c
 [v _SMT1_Initialize SMT1_Initialize `(v  1 e 1 0 ]
 "61 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/tmr0.c
@@ -302,20 +320,22 @@ CF_DONE 8
 [v _TMR1_DefaultGateInterruptHandler TMR1_DefaultGateInterruptHandler `(v  1 s 1 TMR1_DefaultGateInterruptHandler ]
 "35 C:\GitHub\tstTC74LCD\tstTC74LCD.X\ui/ui.c
 [v _Clock_Tick1s Clock_Tick1s `(v  1 s 1 Clock_Tick1s ]
-"40
-[v _ClearAlarmFlags ClearAlarmFlags `(v  1 s 1 ClearAlarmFlags ]
 "42
+[v _ClearAlarmFlags ClearAlarmFlags `(v  1 s 1 ClearAlarmFlags ]
+"44
 [v _RenderNormal RenderNormal `(v  1 s 1 RenderNormal ]
-"63
+"65
 [v _RenderConfig RenderConfig `(v  1 s 1 RenderConfig ]
-"88
+"90
 [v _OnS1Pressed OnS1Pressed `(v  1 s 1 OnS1Pressed ]
-"109
+"111
 [v _OnS2Pressed OnS2Pressed `(v  1 s 1 OnS2Pressed ]
-"133
+"135
 [v _UI_Init UI_Init `(v  1 e 1 0 ]
-"148
+"150
 [v _UI_OnTick1s UI_OnTick1s `(v  1 e 1 0 ]
+"213 C:\GitHub\tstTC74LCD\tstTC74LCD.X/mcc_generated_files/i2c1_master.h
+[v _MSSP1_InterruptHandler MSSP1_InterruptHandler `*.37(v  1 e 2 0 ]
 [s S96 . 1 `uc 1 INTEDG 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 PEIE 1 0 :1:6 
@@ -324,7 +344,7 @@ CF_DONE 8
 "365 C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\pic\include\proc/pic16f18875.h
 [u S101 . 1 `S96 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES101  1 e 1 @11 ]
-[s S2427 . 1 `uc 1 RB0 1 0 :1:0 
+[s S2358 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -334,9 +354,9 @@ CF_DONE 8
 `uc 1 RB7 1 0 :1:7 
 ]
 "464
-[u S2436 . 1 `S2427 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES2436  1 e 1 @13 ]
-[s S2448 . 1 `uc 1 RC0 1 0 :1:0 
+[u S2367 . 1 `S2358 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES2367  1 e 1 @13 ]
+[s S2379 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -346,8 +366,8 @@ CF_DONE 8
 `uc 1 RC7 1 0 :1:7 
 ]
 "526
-[u S2457 . 1 `S2448 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES2457  1 e 1 @14 ]
+[u S2388 . 1 `S2379 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES2388  1 e 1 @14 ]
 "671
 [v _TRISA TRISA `VEuc  1 e 1 @17 ]
 [s S65 . 1 `uc 1 TRISA0 1 0 :1:0 
@@ -410,20 +430,20 @@ CF_DONE 8
 [v _TMR0H TMR0H `VEuc  1 e 1 @29 ]
 "1623
 [v _T0CON0 T0CON0 `VEuc  1 e 1 @30 ]
-[s S2171 . 1 `uc 1 T0OUTPS 1 0 :4:0 
+[s S2102 . 1 `uc 1 T0OUTPS 1 0 :4:0 
 `uc 1 T016BIT 1 0 :1:4 
 `uc 1 T0OUT 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 T0EN 1 0 :1:7 
 ]
 "1643
-[s S2177 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
+[s S2108 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
 `uc 1 T0OUTPS1 1 0 :1:1 
 `uc 1 T0OUTPS2 1 0 :1:2 
 `uc 1 T0OUTPS3 1 0 :1:3 
 ]
-[u S2182 . 1 `S2171 1 . 1 0 `S2177 1 . 1 0 ]
-[v _T0CON0bits T0CON0bits `VES2182  1 e 1 @30 ]
+[u S2113 . 1 `S2102 1 . 1 0 `S2108 1 . 1 0 ]
+[v _T0CON0bits T0CON0bits `VES2113  1 e 1 @30 ]
 "1688
 [v _T0CON1 T0CON1 `VEuc  1 e 1 @31 ]
 "4616
@@ -593,32 +613,32 @@ CF_DONE 8
 [v _TMR1H TMR1H `VEuc  1 e 1 @525 ]
 "6799
 [v _T1CON T1CON `VEuc  1 e 1 @526 ]
-[s S1674 . 1 `uc 1 ON 1 0 :1:0 
+[s S1806 . 1 `uc 1 ON 1 0 :1:0 
 `uc 1 RD16 1 0 :1:1 
 `uc 1 nSYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 CKPS 1 0 :2:4 
 ]
 "6830
-[s S1680 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[s S1812 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 T1RD16 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 T1CKPS0 1 0 :1:4 
 `uc 1 T1CKPS1 1 0 :1:5 
 ]
-[s S1687 . 1 `uc 1 . 1 0 :4:0 
+[s S1819 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 CKPS0 1 0 :1:4 
 `uc 1 CKPS1 1 0 :1:5 
 ]
-[s S1691 . 1 `uc 1 . 1 0 :1:0 
+[s S1823 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RD161 1 0 :1:1 
 ]
-[u S1694 . 1 `S1674 1 . 1 0 `S1680 1 . 1 0 `S1687 1 . 1 0 `S1691 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES1694  1 e 1 @526 ]
+[u S1826 . 1 `S1806 1 . 1 0 `S1812 1 . 1 0 `S1819 1 . 1 0 `S1823 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES1826  1 e 1 @526 ]
 "6895
 [v _T1GCON T1GCON `VEuc  1 e 1 @527 ]
-[s S1720 . 1 `uc 1 . 1 0 :2:0 
+[s S1852 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GVAL 1 0 :1:2 
 `uc 1 GGO_nDONE 1 0 :1:3 
 `uc 1 GSPM 1 0 :1:4 
@@ -627,7 +647,7 @@ CF_DONE 8
 `uc 1 GE 1 0 :1:7 
 ]
 "6929
-[s S1728 . 1 `uc 1 . 1 0 :2:0 
+[s S1860 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1GVAL 1 0 :1:2 
 `uc 1 T1GGO_nDONE 1 0 :1:3 
 `uc 1 T1GSPM 1 0 :1:4 
@@ -635,11 +655,11 @@ CF_DONE 8
 `uc 1 T1GPOL 1 0 :1:6 
 `uc 1 T1GE 1 0 :1:7 
 ]
-[s S1736 . 1 `uc 1 . 1 0 :3:0 
+[s S1868 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T1GGO 1 0 :1:3 
 ]
-[u S1739 . 1 `S1720 1 . 1 0 `S1728 1 . 1 0 `S1736 1 . 1 0 ]
-[v _T1GCONbits T1GCONbits `VES1739  1 e 1 @527 ]
+[u S1871 . 1 `S1852 1 . 1 0 `S1860 1 . 1 0 `S1868 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES1871  1 e 1 @527 ]
 "7091
 [v _T1GATE T1GATE `VEuc  1 e 1 @528 ]
 "7257
@@ -660,7 +680,7 @@ CF_DONE 8
 [v _SMT1PRU SMT1PRU `VEuc  1 e 1 @1175 ]
 "15855
 [v _SMT1CON0 SMT1CON0 `VEuc  1 e 1 @1176 ]
-[s S2264 . 1 `uc 1 PS 1 0 :2:0 
+[s S2195 . 1 `uc 1 PS 1 0 :2:0 
 `uc 1 CPOL 1 0 :1:2 
 `uc 1 SPOL 1 0 :1:3 
 `uc 1 WPOL 1 0 :1:4 
@@ -669,7 +689,7 @@ CF_DONE 8
 `uc 1 EN 1 0 :1:7 
 ]
 "15888
-[s S2272 . 1 `uc 1 SMT1PS 1 0 :2:0 
+[s S2203 . 1 `uc 1 SMT1PS 1 0 :2:0 
 `uc 1 SMT1CPOL 1 0 :1:2 
 `uc 1 SMT1SPOL 1 0 :1:3 
 `uc 1 SMT1WOL 1 0 :1:4 
@@ -677,23 +697,23 @@ CF_DONE 8
 `uc 1 . 1 0 :1:6 
 `uc 1 SMT1EN 1 0 :1:7 
 ]
-[s S2280 . 1 `uc 1 PS0 1 0 :1:0 
+[s S2211 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 ]
-[s S2283 . 1 `uc 1 SMT1PS0 1 0 :1:0 
+[s S2214 . 1 `uc 1 SMT1PS0 1 0 :1:0 
 `uc 1 SMT1PS1 1 0 :1:1 
 ]
-[u S2286 . 1 `S2264 1 . 1 0 `S2272 1 . 1 0 `S2280 1 . 1 0 `S2283 1 . 1 0 ]
-[v _SMT1CON0bits SMT1CON0bits `VES2286  1 e 1 @1176 ]
+[u S2217 . 1 `S2195 1 . 1 0 `S2203 1 . 1 0 `S2211 1 . 1 0 `S2214 1 . 1 0 ]
+[v _SMT1CON0bits SMT1CON0bits `VES2217  1 e 1 @1176 ]
 "15973
 [v _SMT1CON1 SMT1CON1 `VEuc  1 e 1 @1177 ]
-[s S2229 . 1 `uc 1 MODE 1 0 :4:0 
+[s S2160 . 1 `uc 1 MODE 1 0 :4:0 
 `uc 1 . 1 0 :2:4 
 `uc 1 REPEAT 1 0 :1:6 
 `uc 1 GO 1 0 :1:7 
 ]
 "15998
-[s S2234 . 1 `uc 1 MODE0 1 0 :1:0 
+[s S2165 . 1 `uc 1 MODE0 1 0 :1:0 
 `uc 1 MODE1 1 0 :1:1 
 `uc 1 MODE2 1 0 :1:2 
 `uc 1 MODE3 1 0 :1:3 
@@ -701,13 +721,13 @@ CF_DONE 8
 `uc 1 SMT1REPEAT 1 0 :1:6 
 `uc 1 SMT1GO 1 0 :1:7 
 ]
-[s S2242 . 1 `uc 1 SMT1MODE 1 0 :4:0 
+[s S2173 . 1 `uc 1 SMT1MODE 1 0 :4:0 
 ]
-[u S2244 . 1 `S2229 1 . 1 0 `S2234 1 . 1 0 `S2242 1 . 1 0 ]
-[v _SMT1CON1bits SMT1CON1bits `VES2244  1 e 1 @1177 ]
+[u S2175 . 1 `S2160 1 . 1 0 `S2165 1 . 1 0 `S2173 1 . 1 0 ]
+[v _SMT1CON1bits SMT1CON1bits `VES2175  1 e 1 @1177 ]
 "16053
 [v _SMT1STAT SMT1STAT `VEuc  1 e 1 @1178 ]
-[s S2315 . 1 `uc 1 AS 1 0 :1:0 
+[s S2246 . 1 `uc 1 AS 1 0 :1:0 
 `uc 1 WS 1 0 :1:1 
 `uc 1 TS 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -716,7 +736,7 @@ CF_DONE 8
 `uc 1 CPRUP 1 0 :1:7 
 ]
 "16082
-[s S2323 . 1 `uc 1 SMT1AS 1 0 :1:0 
+[s S2254 . 1 `uc 1 SMT1AS 1 0 :1:0 
 `uc 1 SMT1WS 1 0 :1:1 
 `uc 1 SMT1TS 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -724,25 +744,25 @@ CF_DONE 8
 `uc 1 SMT1CPWUP 1 0 :1:6 
 `uc 1 SMT1CPRUP 1 0 :1:7 
 ]
-[s S2331 . 1 `uc 1 . 1 0 :5:0 
+[s S2262 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SMT1RST 1 0 :1:5 
 ]
-[u S2334 . 1 `S2315 1 . 1 0 `S2323 1 . 1 0 `S2331 1 . 1 0 ]
-[v _SMT1STATbits SMT1STATbits `VES2334  1 e 1 @1178 ]
+[u S2265 . 1 `S2246 1 . 1 0 `S2254 1 . 1 0 `S2262 1 . 1 0 ]
+[v _SMT1STATbits SMT1STATbits `VES2265  1 e 1 @1178 ]
 "16152
 [v _SMT1CLK SMT1CLK `VEuc  1 e 1 @1179 ]
 "16220
 [v _SMT1SIG SMT1SIG `VEuc  1 e 1 @1180 ]
 "16312
 [v _SMT1WIN SMT1WIN `VEuc  1 e 1 @1181 ]
-[s S1852 . 1 `uc 1 INTF 1 0 :1:0 
+[s S1979 . 1 `uc 1 INTF 1 0 :1:0 
 `uc 1 . 1 0 :3:1 
 `uc 1 IOCIF 1 0 :1:4 
 `uc 1 TMR0IF 1 0 :1:5 
 ]
 "21281
-[u S1857 . 1 `S1852 1 . 1 0 ]
-[v _PIR0bits PIR0bits `VES1857  1 e 1 @1804 ]
+[u S1984 . 1 `S1979 1 . 1 0 ]
+[v _PIR0bits PIR0bits `VES1984  1 e 1 @1804 ]
 [s S483 . 1 `uc 1 SSP1IF 1 0 :1:0 
 `uc 1 BCL1IF 1 0 :1:1 
 `uc 1 SSP2IF 1 0 :1:2 
@@ -753,7 +773,7 @@ CF_DONE 8
 "21388
 [u S490 . 1 `S483 1 . 1 0 ]
 [v _PIR3bits PIR3bits `VES490  1 e 1 @1807 ]
-[s S1581 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S1713 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 TMR3IF 1 0 :1:2 
 `uc 1 TMR4IF 1 0 :1:3 
@@ -761,9 +781,9 @@ CF_DONE 8
 `uc 1 TMR6IF 1 0 :1:5 
 ]
 "21438
-[u S1588 . 1 `S1581 1 . 1 0 ]
-[v _PIR4bits PIR4bits `VES1588  1 e 1 @1808 ]
-[s S1621 . 1 `uc 1 TMR1GIF 1 0 :1:0 
+[u S1720 . 1 `S1713 1 . 1 0 ]
+[v _PIR4bits PIR4bits `VES1720  1 e 1 @1808 ]
+[s S1753 . 1 `uc 1 TMR1GIF 1 0 :1:0 
 `uc 1 TMR3GIF 1 0 :1:1 
 `uc 1 TMR5GIF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -773,17 +793,17 @@ CF_DONE 8
 `uc 1 CLC4IF 1 0 :1:7 
 ]
 "21490
-[u S1630 . 1 `S1621 1 . 1 0 ]
-[v _PIR5bits PIR5bits `VES1630  1 e 1 @1809 ]
-[s S1839 . 1 `uc 1 INTE 1 0 :1:0 
+[u S1762 . 1 `S1753 1 . 1 0 ]
+[v _PIR5bits PIR5bits `VES1762  1 e 1 @1809 ]
+[s S1023 . 1 `uc 1 INTE 1 0 :1:0 
 `uc 1 . 1 0 :3:1 
 `uc 1 IOCIE 1 0 :1:4 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
 "21703
-[u S1844 . 1 `S1839 1 . 1 0 ]
-[v _PIE0bits PIE0bits `VES1844  1 e 1 @1814 ]
-[s S1396 . 1 `uc 1 SSP1IE 1 0 :1:0 
+[u S1028 . 1 `S1023 1 . 1 0 ]
+[v _PIE0bits PIE0bits `VES1028  1 e 1 @1814 ]
+[s S1533 . 1 `uc 1 SSP1IE 1 0 :1:0 
 `uc 1 BCL1IE 1 0 :1:1 
 `uc 1 SSP2IE 1 0 :1:2 
 `uc 1 BCL2IE 1 0 :1:3 
@@ -791,9 +811,9 @@ CF_DONE 8
 `uc 1 RCIE 1 0 :1:5 
 ]
 "21810
-[u S1403 . 1 `S1396 1 . 1 0 ]
-[v _PIE3bits PIE3bits `VES1403  1 e 1 @1817 ]
-[s S1598 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[u S1540 . 1 `S1533 1 . 1 0 ]
+[v _PIE3bits PIE3bits `VES1540  1 e 1 @1817 ]
+[s S1730 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 TMR3IE 1 0 :1:2 
 `uc 1 TMR4IE 1 0 :1:3 
@@ -801,9 +821,9 @@ CF_DONE 8
 `uc 1 TMR6IE 1 0 :1:5 
 ]
 "21860
-[u S1605 . 1 `S1598 1 . 1 0 ]
-[v _PIE4bits PIE4bits `VES1605  1 e 1 @1818 ]
-[s S1642 . 1 `uc 1 TMR1GIE 1 0 :1:0 
+[u S1737 . 1 `S1730 1 . 1 0 ]
+[v _PIE4bits PIE4bits `VES1737  1 e 1 @1818 ]
+[s S1774 . 1 `uc 1 TMR1GIE 1 0 :1:0 
 `uc 1 TMR3GIE 1 0 :1:1 
 `uc 1 TMR5GIE 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -813,8 +833,8 @@ CF_DONE 8
 `uc 1 CLC4IE 1 0 :1:7 
 ]
 "21912
-[u S1651 . 1 `S1642 1 . 1 0 ]
-[v _PIE5bits PIE5bits `VES1651  1 e 1 @1819 ]
+[u S1783 . 1 `S1774 1 . 1 0 ]
+[v _PIE5bits PIE5bits `VES1783  1 e 1 @1819 ]
 "22112
 [v _PMD0 PMD0 `VEuc  1 e 1 @1942 ]
 "22169
@@ -841,6 +861,8 @@ CF_DONE 8
 [v _CLKRCON CLKRCON `VEuc  1 e 1 @2197 ]
 "23914
 [v _CLKRCLK CLKRCLK `VEuc  1 e 1 @2198 ]
+"29922
+[v _INTPPS INTPPS `VEuc  1 e 1 @3728 ]
 "30748
 [v _SMT1WINPPS SMT1WINPPS `VEuc  1 e 1 @3753 ]
 "30800
@@ -897,6 +919,48 @@ CF_DONE 8
 [v _SLRCONC SLRCONC `VEuc  1 e 1 @3921 ]
 "35182
 [v _INLVLC INLVLC `VEuc  1 e 1 @3922 ]
+[s S992 . 1 `uc 1 IOCCP0 1 0 :1:0 
+`uc 1 IOCCP1 1 0 :1:1 
+`uc 1 IOCCP2 1 0 :1:2 
+`uc 1 IOCCP3 1 0 :1:3 
+`uc 1 IOCCP4 1 0 :1:4 
+`uc 1 IOCCP5 1 0 :1:5 
+`uc 1 IOCCP6 1 0 :1:6 
+`uc 1 IOCCP7 1 0 :1:7 
+]
+"35261
+[u S1001 . 1 `S992 1 . 1 0 ]
+"35261
+"35261
+[v _IOCCPbits IOCCPbits `VES1001  1 e 1 @3923 ]
+[s S971 . 1 `uc 1 IOCCN0 1 0 :1:0 
+`uc 1 IOCCN1 1 0 :1:1 
+`uc 1 IOCCN2 1 0 :1:2 
+`uc 1 IOCCN3 1 0 :1:3 
+`uc 1 IOCCN4 1 0 :1:4 
+`uc 1 IOCCN5 1 0 :1:5 
+`uc 1 IOCCN6 1 0 :1:6 
+`uc 1 IOCCN7 1 0 :1:7 
+]
+"35323
+[u S980 . 1 `S971 1 . 1 0 ]
+"35323
+"35323
+[v _IOCCNbits IOCCNbits `VES980  1 e 1 @3924 ]
+[s S950 . 1 `uc 1 IOCCF0 1 0 :1:0 
+`uc 1 IOCCF1 1 0 :1:1 
+`uc 1 IOCCF2 1 0 :1:2 
+`uc 1 IOCCF3 1 0 :1:3 
+`uc 1 IOCCF4 1 0 :1:4 
+`uc 1 IOCCF5 1 0 :1:5 
+`uc 1 IOCCF6 1 0 :1:6 
+`uc 1 IOCCF7 1 0 :1:7 
+]
+"35385
+[u S959 . 1 `S950 1 . 1 0 ]
+"35385
+"35385
+[v _IOCCFbits IOCCFbits `VES959  1 e 1 @3925 ]
 "35554
 [v _ANSELD ANSELD `VEuc  1 e 1 @3929 ]
 "35616
@@ -932,15 +996,19 @@ CF_DONE 8
 [v _s_seconds s_seconds `VEul  1 s 4 s_seconds ]
 "7
 [v _s_tick1s s_tick1s `VEuc  1 s 1 s_tick1s ]
+"30 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/ext_int.c
+[v _INT_InterruptHandler INT_InterruptHandler `*.37(v  1 e 2 0 ]
 "146 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/i2c1_master.c
 [v _i2c1_fsmStateTable i2c1_fsmStateTable `DC[16]*.37(E12623  1 e 32 0 ]
-[s S1047 . 29 `[6]*.37(E363 1 callbackTable 12 0 `[6]*.30v 1 callbackPayload 6 12 `us 1 time_out 2 18 `us 1 time_out_value 2 20 `uc 1 address 1 22 `*.30uc 1 data_ptr 1 23 `ui 1 data_length 2 24 `E12623 1 state 1 26 `E358 1 error 1 27 `uc 1 addressNackCheck 1 28 :1:0 
+[s S1184 . 29 `[6]*.37(E363 1 callbackTable 12 0 `[6]*.30v 1 callbackPayload 6 12 `us 1 time_out 2 18 `us 1 time_out_value 2 20 `uc 1 address 1 22 `*.30uc 1 data_ptr 1 23 `ui 1 data_length 2 24 `E12623 1 state 1 26 `E358 1 error 1 27 `uc 1 addressNackCheck 1 28 :1:0 
 `uc 1 busy 1 28 :1:1 
 `uc 1 inUse 1 28 :1:2 
 `uc 1 bufferFree 1 28 :1:3 
 ]
 "165
-[v _I2C1_Status I2C1_Status `S1047  1 e 29 0 ]
+[v _I2C1_Status I2C1_Status `S1184  1 e 29 0 ]
+"54 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
+[v _IOCCF5_InterruptHandler IOCCF5_InterruptHandler `*.37(v  1 e 2 0 ]
 "59 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/tmr0.c
 [v _TMR0_InterruptHandler TMR0_InterruptHandler `*.37(v  1 e 2 0 ]
 "57 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/tmr1.c
@@ -949,12 +1017,10 @@ CF_DONE 8
 [v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
 "59
 [v _TMR1_GateInterruptHandler TMR1_GateInterruptHandler `*.37(v  1 e 2 0 ]
-"213 C:\GitHub\tstTC74LCD\tstTC74LCD.X/mcc_generated_files/i2c1_master.h
-[v _MSSP1_InterruptHandler MSSP1_InterruptHandler `*.37(v  1 e 2 0 ]
 "21 C:\GitHub\tstTC74LCD\tstTC74LCD.X\ui/ui.c
-[v _mode mode `E12705  1 s 1 mode ]
+[v _mode mode `E12723  1 s 1 mode ]
 "22
-[v _field field `E12710  1 s 1 field ]
+[v _field field `E12728  1 s 1 field ]
 "24
 [v _hh hh `uc  1 s 1 hh ]
 [v _mm mm `uc  1 s 1 mm ]
@@ -983,15 +1049,15 @@ CF_DONE 8
 [v main@last_update last_update `ul  1 a 4 17 ]
 "83
 [v main@c c `uc  1 a 1 21 ]
-"137
+"138
 } 0
 "9 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[u S2952 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
+[u S3117 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
 "13
-[s S2955 _IO_FILE 11 `S2952 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v sprintf@f f `S2955  1 a 11 61 ]
+[s S3120 _IO_FILE 11 `S3117 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v sprintf@f f `S3120  1 a 11 61 ]
 "12
 [v sprintf@ap ap `[1]*.4v  1 a 1 60 ]
 "9
@@ -1011,68 +1077,67 @@ CF_DONE 8
 {
 "50
 } 0
-"148 C:\GitHub\tstTC74LCD\tstTC74LCD.X\ui/ui.c
+"150 C:\GitHub\tstTC74LCD\tstTC74LCD.X\ui/ui.c
 [v _UI_OnTick1s UI_OnTick1s `(v  1 e 1 0 ]
 {
-"156
+"158
 [v UI_OnTick1s@s2 s2 `uc  1 a 1 79 ]
-"155
+"157
 [v UI_OnTick1s@s1 s1 `uc  1 a 1 78 ]
-"171
+"173
 } 0
-"63
+"65
 [v _RenderConfig RenderConfig `(v  1 s 1 RenderConfig ]
 {
-"67
+"69
 [v RenderConfig@line2 line2 `[17]uc  1 a 17 45 ]
 [v RenderConfig@line1 line1 `[17]uc  1 a 17 28 ]
-"71
+"73
 [v RenderConfig@mL mL `uc  1 a 1 64 ]
-"70
+"72
 [v RenderConfig@mT mT `uc  1 a 1 63 ]
-"69
+"71
 [v RenderConfig@mC mC `uc  1 a 1 62 ]
-"86
+"88
 } 0
-"109
+"111
 [v _OnS2Pressed OnS2Pressed `(v  1 s 1 OnS2Pressed ]
 {
-"131
+"133
 } 0
-"88
+"90
 [v _OnS1Pressed OnS1Pressed `(v  1 s 1 OnS1Pressed ]
 {
-"107
+"109
 } 0
-"40
+"42
 [v _ClearAlarmFlags ClearAlarmFlags `(v  1 s 1 ClearAlarmFlags ]
 {
 } 0
 "35
 [v _Clock_Tick1s Clock_Tick1s `(v  1 s 1 Clock_Tick1s ]
 {
-"38
+"40
 } 0
-"133
+"135
 [v _UI_Init UI_Init `(v  1 e 1 0 ]
 {
-"146
+"148
 } 0
-"42
+"44
 [v _RenderNormal RenderNormal `(v  1 s 1 RenderNormal ]
 {
-"44
-[v RenderNormal@line2 line2 `[17]uc  1 a 17 39 ]
+"46
 [v RenderNormal@line1 line1 `[17]uc  1 a 17 22 ]
-"61
+"63
 } 0
 "13 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\nf_snprintf.c
 [v _snprintf snprintf `(i  1 e 2 0 ]
 {
-[u S2952 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
+[u S3117 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
 "17
-[s S2955 _IO_FILE 11 `S2952 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v snprintf@f f `S2955  1 a 11 5 ]
+[s S3120 _IO_FILE 11 `S3117 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v snprintf@f f `S3120  1 a 11 5 ]
 "15
 [v snprintf@cnt cnt `i  1 a 2 2 ]
 "16
@@ -1088,9 +1153,9 @@ CF_DONE 8
 {
 "1820
 [v vfprintf@cfmt cfmt `*.25uc  1 a 2 53 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "1817
-[v vfprintf@fp fp `*.39S2990  1 p 2 47 ]
+[v vfprintf@fp fp `*.39S3155  1 p 2 47 ]
 [v vfprintf@fmt fmt `*.25DCuc  1 p 2 49 ]
 [v vfprintf@ap ap `*.4*.4v  1 p 1 51 ]
 "1840
@@ -1098,18 +1163,18 @@ CF_DONE 8
 "1177
 [v _vfpfcnvrt vfpfcnvrt `(i  1 s 2 vfpfcnvrt ]
 {
-[u S3019 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `d 1 f 4 0 ]
+[u S3184 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `d 1 f 4 0 ]
 "1188
-[v vfpfcnvrt@convarg convarg `S3019  1 a 4 41 ]
+[v vfpfcnvrt@convarg convarg `S3184  1 a 4 41 ]
 "1179
 [v vfpfcnvrt@cp cp `*.25uc  1 a 2 45 ]
 "1180
 [v vfpfcnvrt@done done `a  1 a 1 40 ]
 "1179
 [v vfpfcnvrt@c c `uc  1 a 1 39 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "1177
-[v vfpfcnvrt@fp fp `*.39S2990  1 p 2 31 ]
+[v vfpfcnvrt@fp fp `*.39S3155  1 p 2 31 ]
 [v vfpfcnvrt@fmt fmt `*.4*.25uc  1 p 1 33 ]
 [v vfpfcnvrt@ap ap `*.4*.4v  1 p 1 34 ]
 "1814
@@ -1122,9 +1187,9 @@ CF_DONE 8
 [v utoa@w w `i  1 a 2 23 ]
 "1007
 [v utoa@p p `a  1 a 1 22 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "1001
-[v utoa@fp fp `*.39S2990  1 p 2 18 ]
+[v utoa@fp fp `*.39S3155  1 p 2 18 ]
 [v utoa@d d `ui  1 p 2 20 ]
 "1047
 } 0
@@ -1182,9 +1247,9 @@ CF_DONE 8
 [v dtoa@s s `uc  1 a 1 28 ]
 "520
 [v dtoa@p p `a  1 a 1 25 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "513
-[v dtoa@fp fp `*.39S2990  1 p 2 18 ]
+[v dtoa@fp fp `*.39S3155  1 p 2 18 ]
 [v dtoa@d d `i  1 p 2 20 ]
 "583
 } 0
@@ -1193,9 +1258,9 @@ CF_DONE 8
 {
 "195
 [v pad@i i `i  1 a 2 16 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "193
-[v pad@fp fp `*.39S2990  1 p 2 11 ]
+[v pad@fp fp `*.39S3155  1 p 2 11 ]
 [v pad@buf buf `*.5uc  1 p 1 13 ]
 [v pad@p p `i  1 p 2 14 ]
 "226
@@ -1218,9 +1283,9 @@ CF_DONE 8
 [v fputs@c c `uc  1 a 1 8 ]
 "8
 [v fputs@s s `*.5DCuc  1 p 1 5 ]
-[u S2952 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
-[s S2955 _IO_FILE 11 `S2952 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v fputs@fp fp `*.39S2955  1 p 2 6 ]
+[u S3117 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
+[s S3120 _IO_FILE 11 `S3117 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v fputs@fp fp `*.39S3120  1 p 2 6 ]
 "19
 } 0
 "1 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\abs.c
@@ -1259,9 +1324,9 @@ CF_DONE 8
 "478
 [v ctoa@w w `i  1 a 2 10 ]
 [v ctoa@l l `i  1 a 2 8 ]
-[s S2990 _IO_FILE 0 ]
+[s S3155 _IO_FILE 0 ]
 "476
-[v ctoa@fp fp `*.39S2990  1 p 2 5 ]
+[v ctoa@fp fp `*.39S3155  1 p 2 5 ]
 [v ctoa@c c `uc  1 p 1 7 ]
 "509
 } 0
@@ -1269,9 +1334,9 @@ CF_DONE 8
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 2 ]
-[u S2952 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
-[s S2955 _IO_FILE 11 `S2952 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v fputc@fp fp `*.39S2955  1 p 2 4 ]
+[u S3117 . 2 `*.39uc 1 buffer 2 0 `*.2DCuc 1 source 2 0 ]
+[s S3120 _IO_FILE 11 `S3117 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v fputc@fp fp `*.39S3120  1 p 2 4 ]
 "24
 } 0
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\putch.c
@@ -1346,7 +1411,7 @@ CF_DONE 8
 "50 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
-"60
+"61
 } 0
 "66 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
@@ -1375,25 +1440,42 @@ CF_DONE 8
 {
 "88
 } 0
-"76 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
+"77 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
 {
-"90
+"91
 } 0
-"55 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
+"57 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
-"133
+"149
 } 0
-"62 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
+"178
+[v _IOCCF5_SetInterruptHandler IOCCF5_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v IOCCF5_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 2 ]
+"180
+} 0
+"63 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
-"74
+"75
 } 0
 "167 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/i2c1_master.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 {
 "174
+} 0
+"59 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/ext_int.c
+[v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
+{
+"70
+} 0
+"50
+[v _INT_SetInterruptHandler INT_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v INT_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 2 ]
+"52
 } 0
 "58 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
@@ -1433,7 +1515,7 @@ CF_DONE 8
 "52 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
-"78
+"86
 } 0
 "175 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/tmr1.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
@@ -1475,4 +1557,34 @@ CF_DONE 8
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
 "141
+} 0
+"151 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_IOC PIN_MANAGER_IOC `(v  1 e 1 0 ]
+{
+"158
+} 0
+"163
+[v _IOCCF5_ISR IOCCF5_ISR `(v  1 e 1 0 ]
+{
+"173
+} 0
+"185
+[v _IOCCF5_DefaultInterruptHandler IOCCF5_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"188
+} 0
+"32 C:\GitHub\tstTC74LCD\tstTC74LCD.X\mcc_generated_files/ext_int.c
+[v _INT_ISR INT_ISR `(v  1 e 1 0 ]
+{
+"38
+} 0
+"41
+[v _INT_CallBack INT_CallBack `(v  1 e 1 0 ]
+{
+"48
+} 0
+"54
+[v _INT_DefaultInterruptHandler INT_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"57
 } 0

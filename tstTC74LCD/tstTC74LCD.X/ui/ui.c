@@ -34,7 +34,9 @@ static uint8_t s1_prev = 1, s2_prev = 1;
 
 static void Clock_Tick1s(void)
 {
-    if (++ss >= 60) { ss = 0; if (++mm >= 60) { mm = 0; if (++hh >= 24) hh = 0; } }
+    if (++ss >= 60) { ss = 0; 
+    if (++mm >= 60) { mm = 0; 
+    if (++hh >= 24) hh = 0; } }
 }
 
 static void ClearAlarmFlags(void) { alarmFlagC = alarmFlagT = alarmFlagL = 0; }
@@ -54,10 +56,10 @@ static void RenderNormal(void)
 
     // For now: dummy temp/lum until you hook sensors fully
     // Format: "tt C   L  l" :contentReference[oaicite:11]{index=11}
-    snprintf(line2, sizeof(line2), "00 C   L  0");
+    //snprintf(line2, sizeof(line2), "   C   L   ");
 
     LCDcmd(0x80); LCDstr(line1);
-    LCDcmd(0xC0); LCDstr(line2);
+    //LCDcmd(0xC0); LCDstr(line2);
 }
 
 static void RenderConfig(void)

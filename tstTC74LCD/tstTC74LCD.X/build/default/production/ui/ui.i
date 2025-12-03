@@ -20836,10 +20836,18 @@ extern __bank0 __bit __timeout;
 # 1 "ui/../mcc_generated_files/device_config.h" 1
 # 51 "ui/../mcc_generated_files/mcc.h" 2
 # 1 "ui/../mcc_generated_files/pin_manager.h" 1
-# 126 "ui/../mcc_generated_files/pin_manager.h"
+# 158 "ui/../mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 138 "ui/../mcc_generated_files/pin_manager.h"
+# 170 "ui/../mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
+# 183 "ui/../mcc_generated_files/pin_manager.h"
+void IOCCF5_ISR(void);
+# 206 "ui/../mcc_generated_files/pin_manager.h"
+void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
+# 230 "ui/../mcc_generated_files/pin_manager.h"
+extern void (*IOCCF5_InterruptHandler)(void);
+# 254 "ui/../mcc_generated_files/pin_manager.h"
+void IOCCF5_DefaultInterruptHandler(void);
 # 52 "ui/../mcc_generated_files/mcc.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdbool.h" 1 3
@@ -21112,6 +21120,20 @@ uint32_t SMT1_GetCapturedPeriod(void);
 # 541 "ui/../mcc_generated_files/smt1.h"
 uint32_t SMT1_GetTimerValue(void);
 # 58 "ui/../mcc_generated_files/mcc.h" 2
+# 1 "ui/../mcc_generated_files/ext_int.h" 1
+# 250 "ui/../mcc_generated_files/ext_int.h"
+void EXT_INT_Initialize(void);
+# 272 "ui/../mcc_generated_files/ext_int.h"
+void INT_ISR(void);
+# 296 "ui/../mcc_generated_files/ext_int.h"
+void INT_CallBack(void);
+# 319 "ui/../mcc_generated_files/ext_int.h"
+void INT_SetInterruptHandler(void (* InterruptHandler)(void));
+# 343 "ui/../mcc_generated_files/ext_int.h"
+extern void (*INT_InterruptHandler)(void);
+# 367 "ui/../mcc_generated_files/ext_int.h"
+void INT_DefaultInterruptHandler(void);
+# 59 "ui/../mcc_generated_files/mcc.h" 2
 # 1 "ui/../mcc_generated_files/tmr1.h" 1
 # 100 "ui/../mcc_generated_files/tmr1.h"
 void TMR1_Initialize(void);
@@ -21141,7 +21163,7 @@ void TMR1_DefaultInterruptHandler(void);
 void TMR1_GATE_ISR(void);
 # 462 "ui/../mcc_generated_files/tmr1.h"
 void TMR1_SetGateInterruptHandler(void (* InterruptHandler)(void));
-# 59 "ui/../mcc_generated_files/mcc.h" 2
+# 60 "ui/../mcc_generated_files/mcc.h" 2
 # 1 "ui/../mcc_generated_files/tmr0.h" 1
 # 100 "ui/../mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
@@ -21163,16 +21185,16 @@ void TMR0_ISR(void);
 extern void (*TMR0_InterruptHandler)(void);
 # 346 "ui/../mcc_generated_files/tmr0.h"
 void TMR0_DefaultInterruptHandler(void);
-# 60 "ui/../mcc_generated_files/mcc.h" 2
+# 61 "ui/../mcc_generated_files/mcc.h" 2
 # 1 "ui/../mcc_generated_files/clkref.h" 1
 # 92 "ui/../mcc_generated_files/clkref.h"
 void CLKREF_Initialize(void);
-# 61 "ui/../mcc_generated_files/mcc.h" 2
-# 75 "ui/../mcc_generated_files/mcc.h"
+# 62 "ui/../mcc_generated_files/mcc.h" 2
+# 76 "ui/../mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 88 "ui/../mcc_generated_files/mcc.h"
+# 89 "ui/../mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 101 "ui/../mcc_generated_files/mcc.h"
+# 102 "ui/../mcc_generated_files/mcc.h"
 void PMD_Initialize(void);
 # 3 "ui/ui.c" 2
 # 1 "ui/../LCD/lcd.h" 1
@@ -21228,7 +21250,9 @@ static uint8_t s1_prev = 1, s2_prev = 1;
 
 static void Clock_Tick1s(void)
 {
-    if (++ss >= 60) { ss = 0; if (++mm >= 60) { mm = 0; if (++hh >= 24) hh = 0; } }
+    if (++ss >= 60) { ss = 0;
+    if (++mm >= 60) { mm = 0;
+    if (++hh >= 24) hh = 0; } }
 }
 
 static void ClearAlarmFlags(void) { alarmFlagC = alarmFlagT = alarmFlagL = 0; }
@@ -21248,10 +21272,10 @@ static void RenderNormal(void)
 
 
 
-    snprintf(line2, sizeof(line2), "00 C   L  0");
+
 
     LCDcmd(0x80); LCDstr(line1);
-    LCDcmd(0xC0); LCDstr(line2);
+
 }
 
 static void RenderConfig(void)

@@ -101,13 +101,14 @@ void main(void)
         {
             uint32_t now = AppClock_Seconds();
             UI_OnTick1s();   // updates hh:mm:ss and renders again
-            if ((now - last_update) >= 5)
+            if ((now - last_update) >= 5 | last_update = 0)
+            {
                 last_update = now;
                 c = readTC74();
                 LCDcmd(0xC0);
                 sprintf(buf, "%02d C", c);
                 LCDstr(buf);
-             
+            }
                 /*
                 LCDpos(0, 8);
                 sprintf(buff, "%02d", last_update);  para confirmar o last update

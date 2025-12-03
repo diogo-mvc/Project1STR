@@ -20817,14 +20817,24 @@ extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\\pic\\include/xc.h" 2 3
 # 55 "mcc_generated_files/pin_manager.h" 2
-# 126 "mcc_generated_files/pin_manager.h"
+# 158 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 138 "mcc_generated_files/pin_manager.h"
+# 170 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
+# 183 "mcc_generated_files/pin_manager.h"
+void IOCCF5_ISR(void);
+# 206 "mcc_generated_files/pin_manager.h"
+void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
+# 230 "mcc_generated_files/pin_manager.h"
+extern void (*IOCCF5_InterruptHandler)(void);
+# 254 "mcc_generated_files/pin_manager.h"
+void IOCCF5_DefaultInterruptHandler(void);
 # 50 "mcc_generated_files/pin_manager.c" 2
 
 
 
+
+void (*IOCCF5_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
@@ -20851,8 +20861,8 @@ void PIN_MANAGER_Initialize(void)
 
 
     ANSELD = 0xFF;
-    ANSELC = 0xE4;
-    ANSELB = 0xFF;
+    ANSELC = 0xC4;
+    ANSELB = 0xEF;
     ANSELE = 0x07;
     ANSELA = 0xFF;
 
@@ -20891,7 +20901,28 @@ void PIN_MANAGER_Initialize(void)
     INLVLC = 0xFF;
     INLVLD = 0xFF;
     INLVLE = 0x07;
-# 127 "mcc_generated_files/pin_manager.c"
+
+
+
+
+
+
+    IOCCFbits.IOCCF5 = 0;
+
+    IOCCNbits.IOCCN5 = 1;
+
+    IOCCPbits.IOCCP5 = 0;
+
+
+
+
+    IOCCF5_SetInterruptHandler(IOCCF5_DefaultInterruptHandler);
+
+
+    PIE0bits.IOCIE = 1;
+
+
+    INTPPS = 0x0C;
     SSP1CLKPPS = 0x13;
     RC3PPS = 0x14;
     SMT1WINPPS = 0x10;
@@ -20902,4 +20933,39 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {
+
+    if(IOCCFbits.IOCCF5 == 1)
+    {
+        IOCCF5_ISR();
+    }
+}
+
+
+
+
+void IOCCF5_ISR(void) {
+
+
+
+
+    if(IOCCF5_InterruptHandler)
+    {
+        IOCCF5_InterruptHandler();
+    }
+    IOCCFbits.IOCCF5 = 0;
+}
+
+
+
+
+void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void)){
+    IOCCF5_InterruptHandler = InterruptHandler;
+}
+
+
+
+
+void IOCCF5_DefaultInterruptHandler(void){
+
+
 }

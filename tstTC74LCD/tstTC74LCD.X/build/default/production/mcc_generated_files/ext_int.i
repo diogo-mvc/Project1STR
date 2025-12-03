@@ -1,4 +1,4 @@
-# 1 "Clock/clock.c"
+# 1 "mcc_generated_files/ext_int.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 295 "<built-in>" 3
@@ -6,7 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Clock/clock.c" 2
+# 1 "mcc_generated_files/ext_int.c" 2
+# 27 "mcc_generated_files/ext_int.c"
 # 1 "C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\\pic\\include/xc.h" 1 3
 # 18 "C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\\pic\\include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -20813,409 +20814,60 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Users/ptava/.mchp_packs/Microchip/PIC16F1xxxx_DFP/1.7.146/xc8\\pic\\include/xc.h" 2 3
-# 2 "Clock/clock.c" 2
-# 1 "Clock/../mcc_generated_files/mcc.h" 1
-# 50 "Clock/../mcc_generated_files/mcc.h"
-# 1 "Clock/../mcc_generated_files/device_config.h" 1
-# 51 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/pin_manager.h" 1
-# 158 "Clock/../mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_Initialize (void);
-# 170 "Clock/../mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_IOC(void);
-# 183 "Clock/../mcc_generated_files/pin_manager.h"
-void IOCCF5_ISR(void);
-# 206 "Clock/../mcc_generated_files/pin_manager.h"
-void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
-# 230 "Clock/../mcc_generated_files/pin_manager.h"
-extern void (*IOCCF5_InterruptHandler)(void);
-# 254 "Clock/../mcc_generated_files/pin_manager.h"
-void IOCCF5_DefaultInterruptHandler(void);
-# 52 "Clock/../mcc_generated_files/mcc.h" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdbool.h" 1 3
-# 54 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/conio.h" 1 3
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdio.h" 1 3
-# 24 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/bits/alltypes.h" 1 3
-# 12 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/bits/alltypes.h" 3
-typedef void * va_list[1];
-
-
-
-
-typedef void * __isoc_va_list[1];
-# 143 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/bits/alltypes.h" 3
-typedef short ssize_t;
-# 255 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/bits/alltypes.h" 3
-typedef long long off_t;
-# 409 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 25 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdio.h" 2 3
-# 52 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
-
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-
-
-
-
-
-int ungetc(int, FILE *);
-int getch(void);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-
-
-
-
-void putch(char);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-__attribute__((__format__(__printf__, 1, 2)))
-int printf(const char *restrict, ...);
-__attribute__((__format__(__printf__, 2, 3)))
-int fprintf(FILE *restrict, const char *restrict, ...);
-__attribute__((__format__(__printf__, 2, 3)))
-int sprintf(char *restrict, const char *restrict, ...);
-__attribute__((__format__(__printf__, 3, 4)))
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-__attribute__((__format__(__printf__, 1, 0)))
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__printf__, 2, 0)))
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__printf__, 3, 0)))
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-__attribute__((__format__(__scanf__, 1, 2)))
-int scanf(const char *restrict, ...);
-__attribute__((__format__(__scanf__, 2, 3)))
-int fscanf(FILE *restrict, const char *restrict, ...);
-__attribute__((__format__(__scanf__, 2, 3)))
-int sscanf(const char *restrict, const char *restrict, ...);
-
-__attribute__((__format__(__scanf__, 1, 0)))
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__scanf__, 2, 0)))
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 8 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/conio.h" 2 3
-# 55 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/interrupt_manager.h" 1
-# 56 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/i2c1_master.h" 1
-# 58 "Clock/../mcc_generated_files/i2c1_master.h"
-typedef enum {
-    I2C1_NOERR,
-    I2C1_BUSY,
-    I2C1_FAIL
-
-
-} i2c1_error_t;
-
-typedef enum
-{
-    I2C1_STOP=1,
-    I2C1_RESTART_READ,
-    I2C1_RESTART_WRITE,
-    I2C1_CONTINUE,
-    I2C1_RESET_LINK
-} i2c1_operations_t;
-
-typedef uint8_t i2c1_address_t;
-typedef i2c1_operations_t (*i2c1_callback_t)(void *funPtr);
-
-
-i2c1_operations_t I2C1_CallbackReturnStop(void *funPtr);
-i2c1_operations_t I2C1_CallbackReturnReset(void *funPtr);
-i2c1_operations_t I2C1_CallbackRestartWrite(void *funPtr);
-i2c1_operations_t I2C1_CallbackRestartRead(void *funPtr);
-
-
-
-
-
-
-void I2C1_Initialize(void);
-# 101 "Clock/../mcc_generated_files/i2c1_master.h"
-i2c1_error_t I2C1_Open(i2c1_address_t address);
-# 111 "Clock/../mcc_generated_files/i2c1_master.h"
-i2c1_error_t I2C1_Close(void);
-# 123 "Clock/../mcc_generated_files/i2c1_master.h"
-i2c1_error_t I2C1_MasterOperation(_Bool read);
-
-
-
-
-i2c1_error_t I2C1_MasterWrite(void);
-
-
-
-
-i2c1_error_t I2C1_MasterRead(void);
-# 142 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetTimeout(uint8_t timeOut);
-# 152 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetBuffer(void *buffer, size_t bufferSize);
-# 164 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetDataCompleteCallback(i2c1_callback_t cb, void *ptr);
-# 174 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetWriteCollisionCallback(i2c1_callback_t cb, void *ptr);
-# 184 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetAddressNackCallback(i2c1_callback_t cb, void *ptr);
-# 194 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetDataNackCallback(i2c1_callback_t cb, void *ptr);
-# 204 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetTimeoutCallback(i2c1_callback_t cb, void *ptr);
-# 213 "Clock/../mcc_generated_files/i2c1_master.h"
-void (*MSSP1_InterruptHandler)(void);
-# 222 "Clock/../mcc_generated_files/i2c1_master.h"
-void I2C1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 57 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/smt1.h" 1
-# 92 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_Initialize(void);
-# 116 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_DataAcquisitionEnable(void);
-# 145 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_DataAcquisitionDisable(void);
-# 176 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_HaltCounter(void);
-# 200 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_SetPeriod(uint32_t periodVal);
-# 225 "Clock/../mcc_generated_files/smt1.h"
-uint32_t SMT1_GetPeriod(void);
-# 254 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_SingleDataAcquisition(void);
-# 283 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_RepeatDataAcquisition(void);
-# 312 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_ManualPeriodBufferUpdate(void);
-# 341 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_ManualPulseWidthBufferUpdate(void);
-# 370 "Clock/../mcc_generated_files/smt1.h"
-void SMT1_ManualTimerReset(void);
-# 405 "Clock/../mcc_generated_files/smt1.h"
-_Bool SMT1_IsWindowOpen(void);
-# 436 "Clock/../mcc_generated_files/smt1.h"
-_Bool SMT1_IsSignalAcquisitionInProgress(void);
-# 466 "Clock/../mcc_generated_files/smt1.h"
-_Bool SMT1_IsTimerIncrementing(void);
-# 491 "Clock/../mcc_generated_files/smt1.h"
-uint32_t SMT1_GetCapturedPulseWidth(void);
-# 516 "Clock/../mcc_generated_files/smt1.h"
-uint32_t SMT1_GetCapturedPeriod(void);
-# 541 "Clock/../mcc_generated_files/smt1.h"
-uint32_t SMT1_GetTimerValue(void);
-# 58 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/ext_int.h" 1
-# 250 "Clock/../mcc_generated_files/ext_int.h"
+# 28 "mcc_generated_files/ext_int.c" 2
+# 1 "mcc_generated_files/ext_int.h" 1
+# 250 "mcc_generated_files/ext_int.h"
 void EXT_INT_Initialize(void);
-# 272 "Clock/../mcc_generated_files/ext_int.h"
+# 272 "mcc_generated_files/ext_int.h"
 void INT_ISR(void);
-# 296 "Clock/../mcc_generated_files/ext_int.h"
+# 296 "mcc_generated_files/ext_int.h"
 void INT_CallBack(void);
-# 319 "Clock/../mcc_generated_files/ext_int.h"
+# 319 "mcc_generated_files/ext_int.h"
 void INT_SetInterruptHandler(void (* InterruptHandler)(void));
-# 343 "Clock/../mcc_generated_files/ext_int.h"
+# 343 "mcc_generated_files/ext_int.h"
 extern void (*INT_InterruptHandler)(void);
-# 367 "Clock/../mcc_generated_files/ext_int.h"
+# 367 "mcc_generated_files/ext_int.h"
 void INT_DefaultInterruptHandler(void);
-# 59 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/tmr1.h" 1
-# 100 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_Initialize(void);
-# 129 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_StartTimer(void);
-# 161 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_StopTimer(void);
-# 196 "Clock/../mcc_generated_files/tmr1.h"
-uint16_t TMR1_ReadTimer(void);
-# 235 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_WriteTimer(uint16_t timerVal);
-# 271 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_Reload(void);
-# 310 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_StartSinglePulseAcquisition(void);
-# 349 "Clock/../mcc_generated_files/tmr1.h"
-uint8_t TMR1_CheckGateValueStatus(void);
-# 367 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_ISR(void);
-# 385 "Clock/../mcc_generated_files/tmr1.h"
- void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 403 "Clock/../mcc_generated_files/tmr1.h"
-extern void (*TMR1_InterruptHandler)(void);
-# 421 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_DefaultInterruptHandler(void);
-# 442 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_GATE_ISR(void);
-# 462 "Clock/../mcc_generated_files/tmr1.h"
-void TMR1_SetGateInterruptHandler(void (* InterruptHandler)(void));
-# 60 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/tmr0.h" 1
-# 100 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_Initialize(void);
-# 129 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_StartTimer(void);
-# 161 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_StopTimer(void);
-# 196 "Clock/../mcc_generated_files/tmr0.h"
-uint8_t TMR0_ReadTimer(void);
-# 235 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_WriteTimer(uint8_t timerVal);
-# 272 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_Reload(uint8_t periodVal);
-# 291 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_ISR(void);
-# 310 "Clock/../mcc_generated_files/tmr0.h"
- void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 328 "Clock/../mcc_generated_files/tmr0.h"
-extern void (*TMR0_InterruptHandler)(void);
-# 346 "Clock/../mcc_generated_files/tmr0.h"
-void TMR0_DefaultInterruptHandler(void);
-# 61 "Clock/../mcc_generated_files/mcc.h" 2
-# 1 "Clock/../mcc_generated_files/clkref.h" 1
-# 92 "Clock/../mcc_generated_files/clkref.h"
-void CLKREF_Initialize(void);
-# 62 "Clock/../mcc_generated_files/mcc.h" 2
-# 76 "Clock/../mcc_generated_files/mcc.h"
-void SYSTEM_Initialize(void);
-# 89 "Clock/../mcc_generated_files/mcc.h"
-void OSCILLATOR_Initialize(void);
-# 102 "Clock/../mcc_generated_files/mcc.h"
-void PMD_Initialize(void);
-# 3 "Clock/clock.c" 2
+# 29 "mcc_generated_files/ext_int.c" 2
 
-# 1 "Clock/clock.h" 1
-# 81 "Clock/clock.h"
-void AppClock_Init(void);
-uint32_t AppClock_Seconds(void);
-uint8_t AppClock_ConsumeTick1s(void);
-# 5 "Clock/clock.c" 2
+void (*INT_InterruptHandler)(void);
 
-static volatile uint32_t s_seconds = 0;
-static volatile uint8_t s_tick1s = 0;
-
-static void TMR1_1sCallback(void)
+void INT_ISR(void)
 {
-    s_seconds++;
-    s_tick1s = 1;
-    LATAbits.LATA7 ^= 1;
+    (PIR0bits.INTF = 0);
+
+
+    INT_CallBack();
 }
 
-void AppClock_Init(void)
+
+void INT_CallBack(void)
 {
 
-    ANSELAbits.ANSA7 = 0;
-    TRISAbits.TRISA7 = 0;
-    LATAbits.LATA7 = 0;
-
-    TMR1_SetInterruptHandler(TMR1_1sCallback);
-    TMR1_StartTimer();
-
-    (INTCONbits.GIE = 1);
-    (INTCONbits.PEIE = 1);
+    if(INT_InterruptHandler)
+    {
+        INT_InterruptHandler();
+    }
 }
 
-uint32_t AppClock_Seconds(void) { return s_seconds; }
+void INT_SetInterruptHandler(void (* InterruptHandler)(void)){
+    INT_InterruptHandler = InterruptHandler;
+}
 
-uint8_t AppClock_ConsumeTick1s(void)
+void INT_DefaultInterruptHandler(void){
+
+
+}
+
+void EXT_INT_Initialize(void)
 {
-    if (s_tick1s) { s_tick1s = 0; return 1; }
-    return 0;
+
+
+
+    (PIR0bits.INTF = 0);
+    (INTCONbits.INTEDG = 1);
+
+    INT_SetInterruptHandler(INT_DefaultInterruptHandler);
+    (PIE0bits.INTE = 1);
+
 }

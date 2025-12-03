@@ -20822,10 +20822,18 @@ extern __bank0 __bit __timeout;
 # 1 "mcc_generated_files/device_config.h" 1
 # 51 "mcc_generated_files/mcc.h" 2
 # 1 "mcc_generated_files/pin_manager.h" 1
-# 126 "mcc_generated_files/pin_manager.h"
+# 158 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 138 "mcc_generated_files/pin_manager.h"
+# 170 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
+# 183 "mcc_generated_files/pin_manager.h"
+void IOCCF5_ISR(void);
+# 206 "mcc_generated_files/pin_manager.h"
+void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
+# 230 "mcc_generated_files/pin_manager.h"
+extern void (*IOCCF5_InterruptHandler)(void);
+# 254 "mcc_generated_files/pin_manager.h"
+void IOCCF5_DefaultInterruptHandler(void);
 # 52 "mcc_generated_files/mcc.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include\\c99/stdbool.h" 1 3
@@ -21097,6 +21105,20 @@ uint32_t SMT1_GetCapturedPeriod(void);
 # 541 "mcc_generated_files/smt1.h"
 uint32_t SMT1_GetTimerValue(void);
 # 58 "mcc_generated_files/mcc.h" 2
+# 1 "mcc_generated_files/ext_int.h" 1
+# 250 "mcc_generated_files/ext_int.h"
+void EXT_INT_Initialize(void);
+# 272 "mcc_generated_files/ext_int.h"
+void INT_ISR(void);
+# 296 "mcc_generated_files/ext_int.h"
+void INT_CallBack(void);
+# 319 "mcc_generated_files/ext_int.h"
+void INT_SetInterruptHandler(void (* InterruptHandler)(void));
+# 343 "mcc_generated_files/ext_int.h"
+extern void (*INT_InterruptHandler)(void);
+# 367 "mcc_generated_files/ext_int.h"
+void INT_DefaultInterruptHandler(void);
+# 59 "mcc_generated_files/mcc.h" 2
 # 1 "mcc_generated_files/tmr1.h" 1
 # 100 "mcc_generated_files/tmr1.h"
 void TMR1_Initialize(void);
@@ -21126,7 +21148,7 @@ void TMR1_DefaultInterruptHandler(void);
 void TMR1_GATE_ISR(void);
 # 462 "mcc_generated_files/tmr1.h"
 void TMR1_SetGateInterruptHandler(void (* InterruptHandler)(void));
-# 59 "mcc_generated_files/mcc.h" 2
+# 60 "mcc_generated_files/mcc.h" 2
 # 1 "mcc_generated_files/tmr0.h" 1
 # 100 "mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
@@ -21148,25 +21170,33 @@ void TMR0_ISR(void);
 extern void (*TMR0_InterruptHandler)(void);
 # 346 "mcc_generated_files/tmr0.h"
 void TMR0_DefaultInterruptHandler(void);
-# 60 "mcc_generated_files/mcc.h" 2
+# 61 "mcc_generated_files/mcc.h" 2
 # 1 "mcc_generated_files/clkref.h" 1
 # 92 "mcc_generated_files/clkref.h"
 void CLKREF_Initialize(void);
-# 61 "mcc_generated_files/mcc.h" 2
-# 75 "mcc_generated_files/mcc.h"
+# 62 "mcc_generated_files/mcc.h" 2
+# 76 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 88 "mcc_generated_files/mcc.h"
+# 89 "mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 101 "mcc_generated_files/mcc.h"
+# 102 "mcc_generated_files/mcc.h"
 void PMD_Initialize(void);
 # 51 "mcc_generated_files/interrupt_manager.c" 2
 
 void __attribute__((picinterrupt(("")))) INTERRUPT_InterruptManager (void)
 {
 
-    if(PIE0bits.TMR0IE == 1 && PIR0bits.TMR0IF == 1)
+    if(PIE0bits.INTE == 1 && PIR0bits.INTF == 1)
+    {
+        INT_ISR();
+    }
+    else if(PIE0bits.TMR0IE == 1 && PIR0bits.TMR0IF == 1)
     {
         TMR0_ISR();
+    }
+    else if(PIE0bits.IOCIE == 1 && PIR0bits.IOCIF == 1)
+    {
+        PIN_MANAGER_IOC();
     }
     else if(INTCONbits.PEIE == 1)
     {

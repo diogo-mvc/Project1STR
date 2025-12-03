@@ -55,6 +55,7 @@
 #include "interrupt_manager.h"
 #include "i2c1_master.h"
 #include "smt1.h"
+#include "ext_int.h"
 #include "tmr1.h"
 #include "tmr0.h"
 #include "clkref.h"
